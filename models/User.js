@@ -20,6 +20,7 @@ const UserSchema = new Schema({
     length: { min: 6, max: 15 },
   },
   membership: { type: Boolean, required: true, lowercase: true },
+  admin: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("User", UserSchema);
