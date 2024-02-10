@@ -44,6 +44,10 @@ form.sign-up{
   gap: 10px;
 }
 
+p.status{
+color: rgb(4, 51, 4);
+}
+
 li{
   color: red;
 }
