@@ -10,7 +10,8 @@ exports.home = asyncHandler(async (req, res, next) => {
 });
 
 exports.login_get = asyncHandler(async (req, res, next) => {
-  res.render("login-form", { title: "Login Form" });
+  const status = req.query.status;
+  res.render("login-form", { title: "Login Form", status });
 });
 
 exports.login_post = passport.authenticate("local", {
@@ -87,13 +88,13 @@ exports.sign_up_post = [
 
     if (!emailExists) {
       await user.save();
-      res.redirect("/user/login?status='Successfully signed up!");
+      res.redirect("/user/login?status=Successfully signed up!");
       return;
     } else {
       res.render("sign-up-form", {
         title: "Sign Up",
         user,
-        errors: ["This email is already registered!"],
+        errors: [{ msg: "This email is already registered!" }],
       });
     }
   }),
