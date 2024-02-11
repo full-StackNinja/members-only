@@ -1,0 +1,52 @@
+extends layout 
+
+block content
+  div.row
+    div.col
+    div.col-8
+      div.content-container
+        if user
+          h3
+            a(href="/user/create-message") Create new message
+
+          p.join-club= user.membership || user.isAdmin ? "": "Want to see who created the message? "
+            a(href="/user/join-club")= user.membership || user.isAdmin ? "" : "Join Club!"
+          hr
+
+          div.message-container
+            if message_list.length
+
+              dl
+                for message in message_list
+                  if message.user._id.toString() === user._id.toString()
+                    p.user-name You 
+                    p.message-date
+                      | #{"(" + message.date_formatted + ")"}
+                  else if user.membership || user.isAdmin
+                    p.user-name 
+                      | #{message.user.first_name + " " + message.user.last_name}
+                    p.message-date
+                      | #{"(" + message.date_formatted + ")"}
+                  else 
+                    p.user-name Anonymous user                    
+                  dt= message.title
+                  dd= message.detail
+                  if user.isAdmin
+                    p 
+                      a(href=`/user/message/${message._id}/delete`) Delete message
+
+
+
+
+            else
+              p Message box empty! 
+                a(href="/user/create-message") post new message!
+
+
+        else
+          div(style="margin:50px auto;text-align:center; font-size:24px")
+            p Please login first to use Chat Box
+            p
+              a(href="/user/login") Login   
+    div.col
+
