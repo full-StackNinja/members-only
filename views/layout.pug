@@ -9,13 +9,30 @@ html
   body
     div.container-fluid
       block header
-        div.row.header
-          div.logo(class='col-10')
-            h1 CHAT BOX
-          div.col.login
-            p
-              a(href="/user/login") Login
-          div.col.sign-up
-            p
-              a(href="/user/sign-up") Sign up
+        if user
+          div.row.header
+            div.logo(class='col-8')
+              h1 CHAT BOX
+
+            div.col.log-out
+              p
+                a(href="/user/log-out") Log out
+            div.col.user
+              p #{user.first_name} #{user.last_name}
+              
+              if user.isAdmin
+                p(style="color:green;") Admin
+              else 
+                p
+                  a(href="/user/admin-login") Admin Login
+        else
+          div.row.header
+            div.logo(class='col-10')
+              h1 CHAT BOX
+            div.col.login
+              p
+                a(href="/user/login") Login
+            div.col.sign-up
+              p
+                a(href="/user/sign-up") Sign up
       block content
