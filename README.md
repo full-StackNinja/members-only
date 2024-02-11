@@ -6,3 +6,4 @@ This project is sort of small chat box where users can login and logout just lik
 For credentials storage and secure access, [nconf](https://www.npmjs.com/package/nconf?activeTab=readme) has been used. Using nconf is easy; it is designed to be a simple key-value store with support for both local and remote storage. Keys are namespaced and delimited by :
 
 
+[LIVE PREVIEW](https://fullstack-private-chatbox.adaptable.app/)
