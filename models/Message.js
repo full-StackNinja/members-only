@@ -18,9 +18,14 @@ const MessageSchema = new Schema({
   },
 });
 
-MessageSchema.virtual("date_formatted").get(() => {
+MessageSchema.virtual("date_formatted").get(function () {
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  console.log("time zone", timeZone);
   // Display time in local time zone of the user as per ISO 8601 format.
-  return DateTime.local().setZone(timeZone).toLocal().toISO();
+  const localTime = DateTime.fromJSDate(this.timestamp, {
+    zone: timeZone,
+  }).toLocaleString(DateTime.DATETIME_MED);
+  return localTime;
 });
 
 module.exports = mongoose.model("Message", MessageSchema);
