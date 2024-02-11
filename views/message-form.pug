@@ -1,0 +1,23 @@
+extends layout
+
+block header
+    div.row(style="margin-top:30px;")
+        div.col
+        div.col
+          if user
+            h1=title
+            div.group-control
+              form.message-form(method='POST')
+                label(for="title") Title:
+                input#title.form-control(type="text" required name="title" value=(undefined===message?"":message.title))
+                label(for="detail") Detail:
+                textarea#detail.form-control(type="text" required name="detail" rows="6" value=(undefined===message?"":message.detail))
+                button.btn.btn-primary(type="submit") Submit
+              if errors
+                ul
+                  for error in errors
+                    li!=error.msg
+          else
+            p Session timed out! 
+              a(href="/user/login") Please login again
+        div.col
